@@ -4,11 +4,6 @@ import useFlip from "./hooks/useFlip";
 
 /* Renders a single pokemon card. */
 function PokemonCard({ front, back, name, stats }) {
-  // const [showing, setshowing] = useState(true);
-  // const setShowing = () => {
-  //   setshowing(isUp => !isUp);
-  // };
-
   const [showing, setShowing] = useFlip();
   return (
     <div onClick={setShowing} className="PokemonCard Card">

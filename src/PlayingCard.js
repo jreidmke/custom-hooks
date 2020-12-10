@@ -5,10 +5,6 @@ import useFlip from "./hooks/useFlip";
 
 /* Renders a single playing card. */
 function PlayingCard({ front, back = backOfCard }) {
-  // const [showing, setshowing] = useState(true);
-  // const setShowing = () => {
-  //   setshowing(isUp => !isUp);
-  // };
   const [showing, setShowing] = useFlip();
   return (
     <img
