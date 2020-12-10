@@ -4,11 +4,8 @@ import axios from 'axios';
 const useAbstracted = (baseURL, initialState = []) => {
     const [cards, setCards] = useState(initialState);
 
-    const addCard = async(params = "") => {
-        const callURL = baseURL.includes('poke') ?
-        `https://pokeapi.co/api/v2/pokemon/${params}/` :
-        `https://deckofcardsapi.com/api/deck/new/draw/`;
-        const resp = await axios.get(callURL);
+    const addCard = async(e = "", params = "") => {
+        const resp = await axios.get(`${baseURL}${params}`);
         setCards(c => [...c, {...resp.data}]);
     };
 
