@@ -4,18 +4,15 @@ import axios from "axios";
 import PokemonSelect from "./PokemonSelect";
 import PokemonCard from "./PokemonCard";
 import "./PokeDex.css";
+import useAbstracted from './hooks/useAbstracted';
 
 /* Renders a list of pokemon cards.
  * Can also add a new card at random,
  * or from a dropdown of available pokemon. */
 function PokeDex() {
-  const [pokemon, setPokemon] = useState([]);
-  const addPokemon = async name => {
-    const response = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${name}/`
-    );
-    setPokemon(pokemon => [...pokemon, { ...response.data, id: uuid() }]);
-  };
+  const [cards, addCard] = useAbstracted(`https://pokeapi.co/api/v2/pokemon/`);
+  const addPokemon = async(name) => addCard('x', name);
+
   return (
     <div className="PokeDex">
       <div className="PokeDex-buttons">
@@ -23,7 +20,7 @@ function PokeDex() {
         <PokemonSelect add={addPokemon} />
       </div>
       <div className="PokeDex-card-area">
-        {pokemon.map(cardData => (
+        {cards.map(cardData => (
           <PokemonCard
             key={cardData.id}
             front={cardData.sprites.front_default}
